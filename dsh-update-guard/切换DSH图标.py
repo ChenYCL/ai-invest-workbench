@@ -64,7 +64,7 @@ _LNK_OVERRIDE: "list[Path] | None" = None
 
 # 快捷方式显示名会随品牌改名而变（见 改快捷方式名.py）。这里按"候选名 + 目标路径"
 # 双重识别，避免改名后整个快捷方式图层静默失效。
-BRAND_LNK_NAME = "玖峰投研工作台"
+BRAND_LNK_NAME = "AI投研工作台"
 LNK_BASENAMES = ["DSH Desktop", BRAND_LNK_NAME]
 
 

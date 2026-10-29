@@ -78,7 +78,7 @@
     第五件事：启动画面（2026-09-29 并入）
     ------------------------------------
     DSH 主窗口要等 host-boot 全部完成才显示，冷启动几十秒里桌面毫无反馈。
-    启动反馈补丁.py 在 app 包 main.js 里插入一个无边框 splash 窗（玖峰 LOGO +
+    启动反馈补丁.py 在 app 包 main.js 里插入一个无边框 splash 窗（AI投研 LOGO +
     进度条动画，双击约 1 秒出现），并在 electron-runtime 的 revealApplication()
     开头挂钩子——主窗口任何路径显示时自动关闭 splash。
     main.js 与 electron-runtime-*.js 同样躺在安装目录里，**覆盖安装会被还原**，
@@ -274,7 +274,7 @@ function Invoke-BrandPatch {
 
 function Invoke-SplashPatch {
     <#
-        调 启动反馈补丁.py 处理 app 包：双击约 1 秒弹出玖峰 splash 窗，
+        调 启动反馈补丁.py 处理 app 包：双击约 1 秒弹出AI投研 splash 窗，
         主窗口经 revealApplication() 显示时自动关闭。
         返回 @{ Available; Ok; Exit; Reason }，契约同 Invoke-BrandPatch：
         启动画面不是关键路径，失败时跳过并提示，不让整个 Lock 失败。
@@ -698,7 +698,7 @@ switch ($Action) {
         }
 
         Write-Host ''
-        Write-Host '  ⑤ 启动画面（双击秒回「玖峰投研工作台」加载窗）' -ForegroundColor White
+        Write-Host '  ⑤ 启动画面（双击秒回「AI投研工作台」加载窗）' -ForegroundColor White
         $splash = Invoke-SplashPatch -Root $root
         if (-not $splash.Available) {
             Write-Warn2 "环境不具备，跳过：$($splash.Reason)"
@@ -832,7 +832,7 @@ switch ($Action) {
 
         # ── ⑤ 启动画面：贴回（覆盖安装会还原 main.js / electron-runtime-*.js）──
         Write-Host ''
-        Write-Host '  ⑤ 启动画面（双击秒回「玖峰投研工作台」加载窗）' -ForegroundColor White
+        Write-Host '  ⑤ 启动画面（双击秒回「AI投研工作台」加载窗）' -ForegroundColor White
 
         $splash = Invoke-SplashPatch -Root $root
         if (-not $splash.Available) {
@@ -957,7 +957,7 @@ switch ($Action) {
 
         # ── ⑤ 启动画面：Unlock 同样不动（启动画面是用户偏好，不是调试开关）────
         Write-Host ''
-        Write-Host '  ⑤ 启动画面（双击秒回「玖峰投研工作台」加载窗）' -ForegroundColor White
+        Write-Host '  ⑤ 启动画面（双击秒回「AI投研工作台」加载窗）' -ForegroundColor White
         $splash = Invoke-SplashPatch -Root $root
         if (-not $splash.Available) {
             Write-Info "环境不具备，跳过：$($splash.Reason)"

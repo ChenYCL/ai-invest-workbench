@@ -15,7 +15,7 @@ import { createRequire } from 'node:module';
 
 const ROOT = import.meta.dirname;
 const DSH_APP = 'D:/Program Files/DSH Desktop/resources/app';
-const BRAND = { name: '玖峰投研工作台', slogan: '让投研工作更简单', upstream: 'DeepSeek Harness' };
+const BRAND = { name: 'AI投研工作台', slogan: '让投研工作更简单', upstream: 'DeepSeek Harness' };
 
 const req = createRequire(path.join(DSH_APP, 'noop.js'));
 let realReact;
@@ -142,7 +142,7 @@ console.log('\n=== A. 字典已注册时 apply ===');
     ok(zh['hero.preview'] === '内测版', 'hero.preview 改成「内测版」');
     ok(zh['placeholder.hero'].indexOf('投研需求') > 0, 'placeholder.hero 去掉编程语境');
     ok(settings.welcomeTitle === '内测声明', 'settings.models 的 welcomeTitle 被覆盖');
-    ok(settings.welcomeBody.indexOf('玖峰投研工作台') === 0, '内测声明正文换成玖峰投研的说明');
+    ok(settings.welcomeBody.indexOf('AI投研工作台') === 0, '内测声明正文换成AI投研的说明');
     ok(settings.welcomeBody.indexOf('DeepSeek Harness') < 0, '内测声明里不再提上游产品名');
     ok(other.welcomeTitle === '别的插件的欢迎语', 'ns 限定的 key 不会误伤其他命名空间同名 key');
     ok(zh['image.tooLarge'] === '图片过大', '未在覆盖表里、也不含术语的 key 原样保留');

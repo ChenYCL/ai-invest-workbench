@@ -90,7 +90,7 @@ def preview(icon: Image.Image, out: Path, note: str) -> None:
         cy = y0 + 80
         ic = icon.resize((max(1, round(icon.width * 21 / icon.height)), 21), Image.LANCZOS)
         cv.paste(ic, (cx, cy), ic)
-        d.text((cx + ic.width + 8, cy + 2), "玖峰投研工作台", fill=fg, font=font(15))
+        d.text((cx + ic.width + 8, cy + 2), "AI投研工作台", fill=fg, font=font(15))
         # 放大样（查细节）
         big = icon.resize((96, round(icon.height * 96 / icon.width)), Image.LANCZOS)
         cv.paste(big, (x0 + 24, y0 + 112), big)

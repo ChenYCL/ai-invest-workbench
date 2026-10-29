@@ -1,5 +1,5 @@
 /**
- * 玖峰投研工作台 · 客户端系统模块（jf-sys）
+ * AI投研工作台 · 客户端系统模块（jf-sys）
  * ==========================================================================
  * 只做两件事，不贪多：
  *   ① 基础使用上报 —— 每日使用情况（时长 / 功能点击次数）与操作异常
@@ -607,7 +607,7 @@ export function createSystem(cfg, deps) {
 				s.lastError ? h("div", { className: "jf-sys-err" }, s.lastError) : null
 			);
 		} else {
-			title = "玖峰投研工作台";
+			title = "AI投研工作台";
 			const up = s.update;
 			body = h("div", { className: "jf-sys-body" },
 				h("div", { className: "jf-sys-meta" }, "版本 v" + cfg.version + " · " + (cfg.channel || "stable")),

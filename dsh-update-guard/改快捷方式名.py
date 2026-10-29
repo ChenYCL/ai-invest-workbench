@@ -27,7 +27,7 @@ TARGET_DIRS = [
     HOME / "AppData/Roaming/Microsoft/Windows/Start Menu/Programs",
 ]
 DEFAULT_FROM = "DSH Desktop"
-DEFAULT_TO = "玖峰投研工作台"
+DEFAULT_TO = "AI投研工作台"
 STATE = Path(__file__).resolve().parent / "改名状态.json"
 BACKUP_ROOT = Path(__file__).resolve().parent
 

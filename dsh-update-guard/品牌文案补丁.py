@@ -37,7 +37,7 @@ APP = Path(r"D:\Program Files\DSH Desktop\resources\app")
 GUARD = Path(__file__).resolve().parent
 STATE = GUARD / "品牌文案补丁状态.json"
 
-BRAND = "玖峰投研工作台"
+BRAND = "AI投研工作台"
 OLD_PRODUCT = "DSH Desktop"
 CJK = re.compile(r"[\u4e00-\u9fff]")
 
@@ -82,7 +82,7 @@ TARGETS = [
     ("lib/native-ui/*.html", "原生窗口页面标题（对话框/恢复/向导/顶栏）"),
     # ↓ 2026-10-09 追加：主进程 bundle（设置面板 / 欢迎页 / 内置开放市场文案）。
     #   main.js 同时被 启动反馈补丁.py 改（注入 splash 块）；两个脚本都走 newline=""，
-    #   互不干扰。splash 块内已是「玖峰投研工作台」且无 "DSH Desktop"，不会被本脚本二次命中。
+    #   互不干扰。splash 块内已是「AI投研工作台」且无 "DSH Desktop"，不会被本脚本二次命中。
     ("lib/main.js", "主进程入口（设置 / 欢迎 / 内置市场中文文案）"),
 ]
 
@@ -129,7 +129,7 @@ EXACT = [
 ZH_CLS = ("[\u4e00-\u9fff\u201c\u201d\u2018\u2019\uff0c\u3002\u3001\uff1a\uff1b"
           "\uff01\uff1f\uff08\uff09\u3010\u3011\u300a\u300b]")
 # 护栏：官方有「DSH Desktop Beta」这个**版本名**（独立 edition，有自己的 productName/appId）。
-# 若不加负向断言，"？DSH Desktop Beta 将继续保留。" 会被改成 "？玖峰投研工作台 Beta …"
+# 若不加负向断言，"？DSH Desktop Beta 将继续保留。" 会被改成 "？AI投研工作台 Beta …"
 # —— 半改的版本名比不改更糟。规则 ② 一律跳过紧邻 "Beta" 的命中。
 P_BEFORE_DESKTOP = re.compile(r"(%s\s*)%s(?!\s*Beta)" % (ZH_CLS, re.escape(OLD_PRODUCT)))
 P_AFTER_DESKTOP = re.compile(r"%s(?!\s*Beta)(?=\s*(?:\$\{[^}]*\}\s*)?%s)"
@@ -137,8 +137,8 @@ P_AFTER_DESKTOP = re.compile(r"%s(?!\s*Beta)(?=\s*(?:\$\{[^}]*\}\s*)?%s)"
 P_BEFORE_DSH = re.compile(r"(%s\s*)DSH (?!Desktop)" % ZH_CLS)
 P_AFTER_DSH = re.compile(r"DSH (?!Desktop)(?=\s*(?:\$\{[^}]*\}\s*)?%s)" % ZH_CLS)
 # 短词 "DSH " 必须排除后面跟 "Desktop" 的情况，否则 "？DSH Desktop Beta 将继续保留。"
-# 会被切成 "？玖峰Desktop Beta 将继续保留。"（实测踩到，见下 SAFETY 兜底）。
-SAFETY_GLUED = re.compile(r"玖峰[A-Za-z]")
+# 会被切成 "？AI投研Desktop Beta 将继续保留。"（实测踩到，见下 SAFETY 兜底）。
+SAFETY_GLUED = re.compile(r"AI投研[A-Za-z]")
 
 
 def patch_text(s: str, rel: str):
@@ -183,7 +183,7 @@ def patch_text(s: str, rel: str):
 
     # ② 中文语境替换（长词在前：先处理 "DSH Desktop"，剩下的 "DSH " 再单独处理）
     #
-    # 关于空格：替换后保留「汉字 + 空格 + 品牌名」的原样式（如 "重启 玖峰投研工作台"）。
+    # 关于空格：替换后保留「汉字 + 空格 + 品牌名」的原样式（如 "重启 AI投研工作台"）。
     # 这是**既有已发布**的风格 —— 托盘/向导里已有 49 处这种写法。此处刻意不改成
     # 「贴合」写法，否则新老文件会出现两种排版风格，反而更不统一。
     def run(pat, new, keep_prefix, s):
@@ -197,13 +197,13 @@ def patch_text(s: str, rel: str):
 
     s = run(P_BEFORE_DESKTOP, BRAND, True, s)
     s = run(P_AFTER_DESKTOP, BRAND, False, s)
-    s = run(P_BEFORE_DSH, "玖峰", True, s)
-    s = run(P_AFTER_DSH, "玖峰", False, s)
+    s = run(P_BEFORE_DSH, "AI投研", True, s)
+    s = run(P_AFTER_DSH, "AI投研", False, s)
 
-    # SAFETY 兜底：替换后不允许出现「玖峰 + ASCII 字母」粘连 —— 那是短词规则误伤
-    # "DSH Desktop …" 的典型症状（如 "玖峰Desktop Beta"）。宁可报警也不要静默产出夹生文案。
+    # SAFETY 兜底：替换后不允许出现「AI投研 + ASCII 字母」粘连 —— 那是短词规则误伤
+    # "DSH Desktop …" 的典型症状（如 "AI投研Desktop Beta"）。宁可报警也不要静默产出夹生文案。
     for m in list(SAFETY_GLUED.finditer(s))[:5]:
-        changes.append(("", "", "★ 检出「玖峰+英文」粘连：…%s…" % s[max(0, m.start() - 16):m.end() + 16]))
+        changes.append(("", "", "★ 检出「AI投研+英文」粘连：…%s…" % s[max(0, m.start() - 16):m.end() + 16]))
     return s, changes
 
 

@@ -51,7 +51,7 @@ const brandMarkStr = JSON.stringify('data:image/png;base64,' + BRAND_MARK_B64);
  */
 const JF_CONFIG = {
   // ★ 服务端地址：上报与「检查更新」都走这里。部署 jiufeng-server 后改成你的域名或 IP。
-  apiBase: 'https://report365.com.cn/jiufeng',
+  apiBase: '',
   app: 'jiufeng-workbench',
   channel: 'stable',
   version: '1.1.11',         // ★ 发版时改这里；服务端 update.json 的 latest 与它比较
@@ -624,7 +624,7 @@ body[data-ds-dark-theme] .jf-sys-toast{background:#2a2a31;color:#f5f5f7}
 				h("div", { className: "dsh-invest-rail" },
 					h("button", {
 						className: "dsh-invest-railbtn expand",
-						title: "展开玖峰投研侧边栏",
+						title: "展开AI投研侧边栏",
 						onClick: askWide,
 					}, "»"),
 
@@ -1243,9 +1243,9 @@ body[data-ds-dark-theme] .jf-sys-toast{background:#2a2a31;color:#f5f5f7}
 		);
 	}
 
-	// #region ============ 品牌与文案（玖峰投研工作台） ============
+	// #region ============ 品牌与文案（AI投研工作台） ============
 	const BRAND = {
-		name: "玖峰投研工作台",
+		name: "AI投研工作台",
 		slogan: "让投研工作更简单",
 		upstream: "DeepSeek Harness",   // 上游产品名（窗口标题里要换掉）
 	};
@@ -1276,7 +1276,7 @@ body[data-ds-dark-theme] .jf-sys-toast{background:#2a2a31;color:#f5f5f7}
 	/**
 	 * 新会话欢迎页（hero 区）的品牌标记。
 	 * DSH 原生在这里画一头鲸鱼（conversation.hero.brand.mark 插槽的 fallback），
-	 * 官方代码先查插件注册、再回退鲸鱼 —— 注册本插槽即可换成玖峰 LOGO，升级不丢。
+	 * 官方代码先查插件注册、再回退鲸鱼 —— 注册本插槽即可换成AI投研 LOGO，升级不丢。
 	 * props 由官方 renderSlot 传入：{ size: 34, className }。
 	 */
 	function HeroBrandMark(props) {
@@ -1305,7 +1305,7 @@ body[data-ds-dark-theme] .jf-sys-toast{background:#2a2a31;color:#f5f5f7}
 	 * 但 register 存进 dicts 的是字典对象的**引用** —— 拿到它改属性即可，且不动 app 包文件，升级不丢。
 	 */
 	/** 模型设置页那份「面向 Harness 开发者」的内测声明正文 */
-	const WELCOME_BODY = "玖峰投研工作台目前处于内测阶段，功能与数据接口都还在持续打磨。" +
+	const WELCOME_BODY = "AI投研工作台目前处于内测阶段，功能与数据接口都还在持续打磨。" +
 		"如果使用中遇到问题，或有想要的功能，欢迎随时反馈。\\n\\n" +
 		"接下来一段时间，投研工作流、专家会诊、游资研判与自动化巡检等模块会陆续增强，" +
 		"界面与交互细节也会持续调整。";
@@ -1611,7 +1611,7 @@ body[data-ds-dark-theme] .jf-sys-toast{background:#2a2a31;color:#f5f5f7}
 		ctx.effect(() => ctx.locale.register("ai-invest", { zh: {}, en: {} }), "dsh-ai-invest-sidebar: dictionaries");
 		runtimeCtx = ctx;
 
-		// 品牌落地：把 DSH 自带的标语/产品名换成玖峰投研工作台（运行时覆盖，不动 app 包）
+		// 品牌落地：把 DSH 自带的标语/产品名换成AI投研工作台（运行时覆盖，不动 app 包）
 		installTextOverrides(ctx);
 		installTitleBrand();
 
@@ -1633,7 +1633,7 @@ body[data-ds-dark-theme] .jf-sys-toast{background:#2a2a31;color:#f5f5f7}
 			name: "sidebar.brand.mark", id: "ai-invest-brand-mark", priority: -1,
 		}, BrandMark));
 
-		// 欢迎页鲸鱼换玖峰 LOGO。try/catch 兜底：万一宿主对插槽名做了 ledger 校验且不认这个名字，
+		// 欢迎页鲸鱼换AI投研 LOGO。try/catch 兜底：万一宿主对插槽名做了 ledger 校验且不认这个名字，
 		// 只损失这一个插槽（回到原生鲸鱼），绝不能拖垮整个插件的加载。
 		try {
 			ctx.slots.inject("conversation.hero.brand.mark", () => ctx.slots.register({

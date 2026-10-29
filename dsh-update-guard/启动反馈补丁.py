@@ -3,7 +3,7 @@
 启动反馈补丁.py — 给 DSH Desktop app 包打「双击秒回启动画面」补丁。
 
 背景：DSH 主窗口要等 host-boot（加载全部插件）完成才显示，期间桌面无任何反馈。
-本补丁在 app.whenReady() 后立即创建一个无边框启动画面（玖峰品牌 + 加载动画），
+本补丁在 app.whenReady() 后立即创建一个无边框启动画面（AI投研品牌 + 加载动画），
 主窗口出现时自动关闭（挂在 revealApplication() 上，兜住全部显路）。
 
 改动两个文件（都会被覆盖安装还原 → 由 切换更新守卫.ps1 的 Lock 负责贴回）：
@@ -72,7 +72,7 @@ animation:slide 1.2s ease-in-out infinite}
 .tip{margin-top:12px;color:#5c6570;font-size:11px}
 </style></head><body>
 <img class="logo" src="__LOGO__" alt="">
-<div class="name">玖峰投研工作台</div>
+<div class="name">AI投研工作台</div>
 <div class="slogan">把散落的金融工具，装进一个桌面端</div>
 <div class="bar"><i></i></div>
 <div class="tip">正在启动，组件加载通常需要几秒</div>
